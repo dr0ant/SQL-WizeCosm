@@ -18,9 +18,9 @@ DROP TABLE IF EXISTS arcs.Ere_aeon;
 CREATE TABLE arcs.Ere_aeon
 (
 ere_id VARCHAR(20),
-ere_name VARCHAR(50),
+ere_name VARCHAR(500),
 ere_evernote VARcHAR(5000),
-ere_parent_name VARCHAR(50),
+ere_parent_name VARCHAR(500),
 ere_faction VARCHAR(10),
 ere_added_date timestamptz NOT NULL DEFAULT now()
 )
