@@ -3,6 +3,8 @@
  * - personnage
 */
 
+ 
+alter table public."Story_line_V2" add column last_refresh  timestamptz NOT NULL DEFAULT now();
 
 select * from public."Story_line_V2" as SL
 where 1=1
@@ -23,9 +25,16 @@ personnage_friends VARCHAR(5000),
 personnage_organisations VARCHAR(5000),
 personnage_nickname VARCHAR(500),
 personnage_parent VARCHAR(500),
+personnage_race VARCHAR(500),
+personnage_notes VARCHAR(1000),
 personnage_added_date  timestamptz NOT NULL DEFAULT now()
 )
 ;
+
+
+
+DROP TABLE public."Story_line_V2";
+
 
 -- Step 1: Create the function that inserts
 
@@ -48,7 +57,9 @@ INSERT INTO
 	        personnage_friends,
 	        personnage_organisations,
 	        personnage_nickname,
-	        personnage_parent)
+	        personnage_parent,
+	        personnage_race,
+	        personnage_notes)
 	     VALUES(new."Display ID",
                 new."Label",
                 new."Links",
@@ -58,7 +69,9 @@ INSERT INTO
                 new."Friend",
                 new."Relates to",
                 new."Nickname",
-                new."Parent_1");
+                new."Parent_1",
+               	new."Traits",
+               	new."Notes");
 
 RETURN new;
 END;
@@ -77,5 +90,6 @@ CREATE  TRIGGER copy_personnage
  FOR EACH row
  WHEN (NEW."Type" ='Character')
  EXECUTE PROCEDURE function_copy();
+
 
 
