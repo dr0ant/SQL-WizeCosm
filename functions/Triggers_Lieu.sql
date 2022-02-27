@@ -35,7 +35,7 @@ begin
 	-- DELETE OLD VALUES
 delete from  geographie.Lieu_aeon
 	where 1=1 
-		and "Lieu_added_date" < now() ;
+		and Lieu_added_date < now() ;
 	-- INSERT NEW ONES
 INSERT INTO
 	        geographie.Lieu_aeon(
